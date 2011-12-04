@@ -201,10 +201,9 @@ class MapGen(object):
 
         # write out the default marker table
         with open(os.path.join(self.destdir, "markers.js"), 'w') as output:
-            output.write("overviewer.collections.markerDatas.push([\n")
-            for marker in markers:
-                output.write(json.dumps(marker))
-                if marker != markers[-1]:
-                    output.write(",")
-                output.write("\n")
-            output.write("]);\n")
+            output.write("// This is a generated file. Please do not edit it!\n")
+            output.write("overviewer.collections.markerDatas.push(\n")
+            output.write("// --start marker json dump--")
+            json.dump(output, markers, indent=0)
+            output.write("// --end marker json dump--")
+            output.write(");\n")
